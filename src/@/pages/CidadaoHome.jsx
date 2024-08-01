@@ -10,15 +10,27 @@ import {
 } from "@/components/ui/table";
 import { getApi } from "@/services/api";
 import NavSidebar from "@/components/nav_sidebar";
+import CadastroModal from "@/components/AlertasComponents/Cidadaos/CadastroModal";
+import formatDate from "@/services/FormatData";
+import MensagemCarregando from "@/components/AlertasComponents/Cidadaos/Carregando";
+import AtualizarModal from "@/components/AlertasComponents/Cidadaos/AtualizarModal";
+import ConfirmDeleteModal from "@/components/AlertasComponents/Cidadaos/ConfirmarExcluir";
 
 export default function CidadaoHome() {
   const [cidadaos, setCidadaos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedCidadaoId, setSelectedCidadaoId] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchCidadaos = async () => {
       try {
+        setLoading(true);
         const api = await getApi();
         const response = await api.get("/cidadaos");
         setCidadaos(response.data);
@@ -34,22 +46,57 @@ export default function CidadaoHome() {
     fetchCidadaos();
   }, []);
 
-  const handleDelete = async (id) => {
-    if (window.confirm("Você tem certeza que deseja excluir este cidadão?")) {
-      try {
-        const api = await getApi();
-        await api.delete(`/cidadaos/${id}`);
-        setCidadaos(cidadaos.filter((cidadao) => cidadao.id !== id));
-      } catch (error) {
-        console.error("Erro ao excluir cidadão:", error);
-        setError("Erro ao excluir cidadão.");
-      }
+  const handleOpenModal = (cidadaoId) => {
+    setSelectedCidadaoId(cidadaoId);
+    setIsEditModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsEditModalOpen(false);
+    setSelectedCidadaoId(null);
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const openDeleteModal = (cidadaoId) => {
+    setSelectedCidadaoId(cidadaoId);
+    setIsDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setSelectedCidadaoId(null);
+  };
+
+  const confirmDelete = async () => {
+    if (!selectedCidadaoId) return;
+
+    try {
+      const api = await getApi();
+      await api.delete(`/cidadao/${selectedCidadaoId}`); // Corrigido para corresponder à rota da API
+      setCidadaos(
+        cidadaos.filter((cidadao) => cidadao.id !== selectedCidadaoId)
+      );
+    } catch (error) {
+      console.error("Erro ao excluir cidadão:", error);
+      setError("Erro ao excluir cidadão.");
     }
   };
 
-  if (loading) return <div>Carregando...</div>;
   if (error) return <div>{error}</div>;
 
+  const indexOfLastCidadaos = currentPage * itemsPerPage;
+  const indexOfFirstCidadao = indexOfLastCidadaos - itemsPerPage;
+  const currentCidadaos = cidadaos.slice(
+    indexOfFirstCidadao,
+    indexOfLastCidadaos
+  );
+  const totalPages = Math.ceil(cidadaos.length / itemsPerPage);
   return (
     <NavSidebar>
       <div className="bg-white text-[#004b85]">
@@ -58,7 +105,10 @@ export default function CidadaoHome() {
         </header>
         <main className="p-6">
           <div className="mb-4 flex justify-end">
-            <Button className="bg-green-700 hover:bg-muted hover:text-green-700">
+            <Button
+              className="bg-green-700 hover:bg-muted hover:text-green-700"
+              onClick={openModal}
+            >
               + CIDADÃO
             </Button>
           </div>
@@ -86,32 +136,36 @@ export default function CidadaoHome() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {cidadaos.map((cidadao) => (
+              {currentCidadaos?.map((cidadao) => (
                 <TableRow
                   key={cidadao.id}
+                  onClick={() => handleOpenModal(cidadao.id)}
                   className="border-b text-gray-600  hover:bg-[#004b85] hover:text-[#fff] cursor-pointer "
                 >
                   <TableCell className="px-4 py-3 font-semibold  ">
-                    {cidadao.id}
+                    {cidadao?.id}
                   </TableCell>
                   <TableCell className="px-4 py-3 font-semibold  ">
-                    {cidadao.nome}
+                    {cidadao?.nome}
                   </TableCell>
                   <TableCell className="px-4 py-3 font-semibold  ">
-                    {cidadao.email}
+                    {cidadao?.email}
                   </TableCell>
                   <TableCell className="px-4 py-3 font-semibold  ">
-                    {cidadao.data_nasc}
+                    {formatDate(cidadao?.data_nasc)}
                   </TableCell>
                   <TableCell className="px-4 py-3 font-semibold  ">
-                    {cidadao.bairro}
+                    {cidadao?.bairro}
                   </TableCell>
                   <TableCell>
                     <div className="flex gap-2">
                       <Button
                         variant="outline"
                         size="icon"
-                        onClick={() => handleDelete(cidadao.id)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openDeleteModal(cidadao.id);
+                        }}
                       >
                         <TrashIcon className="h-4 w-4 text-red-600" />
                       </Button>
@@ -121,8 +175,40 @@ export default function CidadaoHome() {
               ))}
             </TableBody>
           </Table>
+          <div className="mt-6 flex justify-between items-center">
+            <Button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage(currentPage - 1)}
+              className="bg-blue-500 text-white"
+            >
+              Anterior
+            </Button>
+            <span>
+              Página {currentPage} de {totalPages}
+            </span>
+            <Button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage(currentPage + 1)}
+              className="bg-blue-500 text-white"
+            >
+              Próxima
+            </Button>
+          </div>
         </main>
         {/** Criar Cidadão */}
+        <MensagemCarregando open={loading} />
+        <CadastroModal isOpen={isModalOpen} onClose={closeModal} />
+        <AtualizarModal
+          isOpen={isEditModalOpen}
+          onClose={handleCloseModal}
+          cidadaoId={selectedCidadaoId}
+        />
+
+        <ConfirmDeleteModal
+          open={isDeleteModalOpen}
+          onClose={closeDeleteModal}
+          onConfirm={confirmDelete}
+        />
       </div>
     </NavSidebar>
   );

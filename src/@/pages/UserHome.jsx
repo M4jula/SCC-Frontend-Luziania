@@ -173,7 +173,7 @@ export default function HomeUsuarios() {
               onClick={() => setIsAddUserModalOpen(true)}
               className="bg-green-600 text-white"
             >
-              + Adicionar Usuário
+              + USUÁRIO
             </Button>
             {/**Editar usuario */}
             {isEditModalOpen && selectedUser && (

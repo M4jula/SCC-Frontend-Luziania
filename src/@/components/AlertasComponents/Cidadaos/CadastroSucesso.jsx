@@ -7,14 +7,14 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
-export default function AtualizadoSucesso({ show, onClose }) {
+export default function CadastroSucesso({ show, onClose }) {
   return (
     <Dialog open={show} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <div className="flex flex-col items-center justify-center gap-4 py-8">
           <CircleCheckIcon className="size-12 text-green-500" />
           <p className="text-lg font-medium">
-            Usuário Atualizado com sucesso!!!
+            Cidadão Cadastrado com sucesso!!!
           </p>
         </div>
         <DialogFooter>

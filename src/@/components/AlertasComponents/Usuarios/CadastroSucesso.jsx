@@ -21,6 +21,7 @@ export default function CadastroSucesso({ show, onClose }) {
           <div>
             <Button
               type="button"
+              onClick={onClose}
               className="bg-red-500 hover:bg-muted hover:text-red-500"
             >
               Fechar

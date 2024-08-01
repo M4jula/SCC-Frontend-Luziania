@@ -86,7 +86,7 @@ const AddUser = ({ open, onClose }) => {
           <div className="space-y-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="nome" className="text-right text-[#004b85]">
-                Nome
+                Nome <Label className="text-red-600">*</Label>
               </Label>
               <Input
                 id="nome"
@@ -95,11 +95,12 @@ const AddUser = ({ open, onClose }) => {
                 maxLength={30}
                 value={newUser.nome}
                 onChange={handleInputChange}
+                required
               />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="email" className="text-right text-[#004b85]">
-                Email
+                Email <Label className="text-red-600">*</Label>
               </Label>
               <Input
                 id="email"
@@ -109,6 +110,7 @@ const AddUser = ({ open, onClose }) => {
                 maxLength={30}
                 value={newUser.email}
                 onChange={handleInputChange}
+                required
               />
             </div>
             <div className="grid items-center grid-cols-4 gap-4">
@@ -126,7 +128,7 @@ const AddUser = ({ open, onClose }) => {
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="access" className="text-right text-[#004b85]">
-                Função
+                Função <Label className="text-red-600">*</Label>
               </Label>
               <Select
                 id="acess" // Corrigido o id para coincidir com o campo
@@ -135,6 +137,7 @@ const AddUser = ({ open, onClose }) => {
                 onValueChange={(value) =>
                   setNewUser((prev) => ({ ...prev, acess: value }))
                 }
+                required
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Selecione o nível de acesso" />
@@ -148,7 +151,7 @@ const AddUser = ({ open, onClose }) => {
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="password" className="text-right text-[#004b85]">
-                Senha
+                Senha <Label className="text-red-600">*</Label>
               </Label>
               <Input
                 id="password"
@@ -158,6 +161,7 @@ const AddUser = ({ open, onClose }) => {
                 maxLength={12}
                 value={newUser.password}
                 onChange={handleInputChange}
+                required
               />
             </div>
           </div>
