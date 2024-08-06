@@ -34,13 +34,17 @@ export default function Login() {
 
     try {
       const api = await getApi();
-      const response = await api.post("/autentication", {
-        email,
-        password,
-      });
+      const response = await api.post(
+        "/autentication",
+        {
+          email,
+          password,
+        },
+        { withCredentials: true }
+      );
 
-      const { user } = response.data;
-
+      const { user, token } = response.data;
+      localStorage.setItem("token", "kjadsfqweFEOENMCSAKOIWQHEEF5456");
       setUser(user);
       setSuccess(response.data.message);
       setError("");

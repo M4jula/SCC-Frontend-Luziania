@@ -6,10 +6,16 @@ import { useUserContext } from "@/context/UserContext";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-
+import EditProfileModal from "@/components/AlertasComponents/Usuarios/EditPerfil";
+import Footer from "./footer";
 export default function NavSidebar({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { user } = useUserContext();
+
+  const handleIconClick = () => {
+    setIsModalOpen(true);
+  };
 
   return (
     <div className="flex min-h-screen">
@@ -59,7 +65,7 @@ export default function NavSidebar({ children }) {
           </div>
           <div className="flex items-center gap-2 text-[#004b85] hover:bg-[#004b85] hover:text-[#fff] hover:rounded-md p-2 transition-colors ">
             <CalendarIcon className="w-5 h-5" />
-            <Link to={"#"} className="flex items-center w-full">
+            <Link to={"/solicitacoes"} className="flex items-center w-full">
               Solicitações
             </Link>
           </div>
@@ -87,15 +93,17 @@ export default function NavSidebar({ children }) {
             <p className="text-sm text-white">Planaltina de Goiás</p>
           </div>
           <div className="flex items-center space-x-2">
-            <Avatar>
-              <AvatarImage src="/img/user-icon.jpg" />
-              <AvatarFallback></AvatarFallback>
-            </Avatar>
+            <div onClick={handleIconClick} style={{ cursor: "pointer" }}>
+              <Avatar>
+                <AvatarImage src="/img/user-icon.jpg" />
+                <AvatarFallback></AvatarFallback>
+              </Avatar>
+            </div>
             {user ? (
               <div className="text-white">
-                <p>Olá, {user.email}</p>
+                <p>Olá, {user?.email || ""}</p>
                 {/**Adicionar regra que pega na sessão o email do usuario */}
-                <p>{user.acess}</p>
+                <p>{user?.acess || ""}</p>
                 {/**Adicionar regra que pega na sessão o nome do usuario */}
               </div>
             ) : (
@@ -107,7 +115,11 @@ export default function NavSidebar({ children }) {
           {/**Todo o conteudo das minhas paginas */}
           {children}
         </main>
+        <Footer />
       </div>
+      {isModalOpen && (
+        <EditProfileModal user={user} onClose={() => setIsModalOpen(false)} />
+      )}
     </div>
   );
 }

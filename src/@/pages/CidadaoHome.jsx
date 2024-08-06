@@ -18,6 +18,7 @@ import ConfirmDeleteModal from "@/components/AlertasComponents/Cidadaos/Confirma
 
 export default function CidadaoHome() {
   const [cidadaos, setCidadaos] = useState([]);
+  const [showSuccess, setShowSuccess] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,6 +27,7 @@ export default function CidadaoHome() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedCidadaoId, setSelectedCidadaoId] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [cidadaoData, setCidadaoData] = useState(null);
 
   useEffect(() => {
     const fetchCidadaos = async () => {
@@ -37,7 +39,7 @@ export default function CidadaoHome() {
         setError(null);
       } catch (error) {
         console.error("Erro ao buscar dados dos cidadãos:", error);
-        setError("Erro ao buscar dados dos cidadãos.");
+        setError(error.message);
       } finally {
         setLoading(false);
       }
@@ -46,14 +48,11 @@ export default function CidadaoHome() {
     fetchCidadaos();
   }, []);
 
-  const handleOpenModal = (cidadaoId) => {
-    setSelectedCidadaoId(cidadaoId);
-    setIsEditModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
+  const handleEditClose = (isSuccess) => {
     setIsEditModalOpen(false);
-    setSelectedCidadaoId(null);
+    if (isSuccess) {
+      setShowSuccess(true);
+    }
   };
 
   const openModal = () => {
@@ -139,7 +138,10 @@ export default function CidadaoHome() {
               {currentCidadaos?.map((cidadao) => (
                 <TableRow
                   key={cidadao.id}
-                  onClick={() => handleOpenModal(cidadao.id)}
+                  onClick={() => {
+                    setSelectedCidadaoId(cidadao);
+                    setIsEditModalOpen(true);
+                  }}
                   className="border-b text-gray-600  hover:bg-[#004b85] hover:text-[#fff] cursor-pointer "
                 >
                   <TableCell className="px-4 py-3 font-semibold  ">
@@ -198,11 +200,14 @@ export default function CidadaoHome() {
         {/** Criar Cidadão */}
         <MensagemCarregando open={loading} />
         <CadastroModal isOpen={isModalOpen} onClose={closeModal} />
-        <AtualizarModal
-          isOpen={isEditModalOpen}
-          onClose={handleCloseModal}
-          cidadaoId={selectedCidadaoId}
-        />
+        {isEditModalOpen && selectedCidadaoId && (
+          <AtualizarModal
+            cidadao={selectedCidadaoId}
+            open={isEditModalOpen}
+            onClose={(isSuccess) => handleEditClose(isSuccess)}
+            recarga={() => setLoading(true)}
+          />
+        )}
 
         <ConfirmDeleteModal
           open={isDeleteModalOpen}

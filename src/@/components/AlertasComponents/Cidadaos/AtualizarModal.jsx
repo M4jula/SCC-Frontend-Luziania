@@ -28,80 +28,95 @@ import formatCEP from "@/services/FormatCEP";
 import formatCPF from "@/services/FormatCPF";
 import CadastroSucesso from "./CadastroSucesso";
 import MensagemCarregando from "./Carregando";
+import ErroAtualizar from "./ErroAtualizar";
+import UpdateSucesso from "./UpdateSucesso";
 
-export default function AtualizarModal({ isOpen, onClose, cidadaoId }) {
+export default function AtualizarModal({ open, onClose, cidadao }) {
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [cidadaoData, setCidadaoData] = useState(null);
+  const [selectedCidadaoId, setSelectedCidadaoId] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    nome: "",
-    data_nasc: "",
-    rg: "",
-    cpf: "",
-    endereco: "",
-    bairro: "",
-    cidade: "",
-    estado: "",
-    cep: "",
-    telefone: "",
-    email: "",
-    whatsapp: "",
-    observacao: "",
-  });
+  const [nome, setNome] = useState(cidadao.nome);
+  const [data_nasc, setData_nasc] = useState(cidadao.data_nasc);
+  const [rg, setRG] = useState(cidadao.rg || "");
+  const [cpf, setCPF] = useState(cidadao.cpf || "");
+  const [endereco, setEndereco] = useState(cidadao.endereco || "");
+  const [bairro, setBairro] = useState(cidadao.bairro || "");
+  const [cidade, setCidade] = useState(cidadao.cidade || "");
+  const [estado, setEstado] = useState(cidadao.estado || "");
+  const [cep, setCEP] = useState(cidadao.cep || "");
+  const [telefone, setTelefone] = useState(cidadao.telefone || "");
+  const [email, setEmail] = useState(cidadao.email || "");
+  const [whatsapp, setWhatsapp] = useState(cidadao.whatsapp || "");
+  const [observacao, setObservacao] = useState(cidadao.observacao || "");
 
   useEffect(() => {
-    if (isOpen && cidadaoId) {
-      // Carregar dados do cidadão para edição
-      const fetchCitizenData = async () => {
-        setLoading(true);
-        try {
-          const api = await getApi();
-          const response = await api.get(`/cidadaos/${cidadaoId}`);
-          setFormData(response.data);
-        } catch (error) {
-          console.error("Erro ao carregar dados do cidadão:", error);
-        } finally {
-          setLoading(false);
-        }
-      };
-      fetchCitizenData();
+    if (cidadao) {
+      setNome(cidadao.nome);
+      setEmail(cidadao.email);
+      setData_nasc(cidadao.data_nasc);
+      setRG(cidadao.rg || "");
+      setCPF(cidadao.cpf || "");
+      setEndereco(cidadao.endereco || "");
+      setBairro(cidadao.bairro || "");
+      setCidade(cidadao.cidade || "");
+      setEstado(cidadao.estado || "");
+      setTelefone(cidadao.telefone || "");
+      setWhatsapp(cidadao.whatsapp || "");
+      setObservacao(cidadao.observacao || "");
+      setCEP(cidadao.cep || "");
     }
-  }, [isOpen, cidadaoId]);
+  }, [cidadao]);
 
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [id]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
+  const handleUpdate = async () => {
     try {
-      const api = await getApi();
-      const response = await api.put(
-        `/cidadaos/atualizar/${cidadaoId}`, // Corrigido para usar o ID diretamente no endpoint
-        formData
-      );
-      console.log("oq vem aqui?", response);
+      const updates = {}; // Objeto para armazenar apenas os campos alterados
 
-      if (response.status === 200) {
-        setShowSuccess(true);
-        setTimeout(() => {
-          setShowSuccess(false);
-          onClose();
-        }, 2000);
-      } else {
-        console.error(response.data.message);
+      if (nome !== cidadao.nome) updates.nome = nome;
+      if (email !== cidadao.email) updates.email = email;
+      if (data_nasc !== cidadao.data_nasc) updates.data_nasc = data_nasc;
+      if (rg !== cidadao.rg) updates.rg = rg;
+      if (cpf !== cidadao.cpf) updates.cpf = cpf;
+      if (endereco !== cidadao.endereco) updates.endereco = endereco;
+      if (bairro !== cidadao.bairro) updates.bairro = bairro;
+      if (cidade !== cidadao.cidade) updates.cidade = cidade;
+      if (estado !== cidadao.estado) updates.estado = estado;
+      if (telefone !== cidadao.telefone) updates.telefone = telefone;
+      if (whatsapp !== cidadao.whatsapp) updates.whatsapp = whatsapp;
+      if (observacao !== cidadao.observacao) updates.observacao = observacao;
+      if (cep !== cidadao.cep) updates.cep = cep;
+
+      if (Object.keys(updates).length === 0) {
+        alert("Nenhum campo foi alterado");
+        return;
       }
+      setLoading(true);
+      const api = await getApi();
+      await api.put(`/cidadaos/${cidadao.id}`, updates, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setShowSuccess(true);
+      setTimeout(() => {
+        setShowSuccess(false);
+        onClose(); // Fecha o modal após sucesso
+      }, 2000);
     } catch (error) {
-      console.error("Erro ao atualizar cidadão:", error);
+      console.error(
+        "Erro ao atualizar o Cidadão:",
+        error.response ? error.response.data : error.message
+      );
+
+      setShowError(true);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[600px]">
         <DialogHeader>
           <DialogTitle className="text-[#004b85]">
@@ -111,7 +126,7 @@ export default function AtualizarModal({ isOpen, onClose, cidadaoId }) {
             Altere os dados ou insira novos dados em um cadastro.
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="grid gap-4 py-4">
+        <form className="grid gap-4 py-4">
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
@@ -123,8 +138,8 @@ export default function AtualizarModal({ isOpen, onClose, cidadaoId }) {
                   placeholder="Digite o nome completo"
                   minLength={8}
                   maxLength={35}
-                  value={formData.nome}
-                  onChange={handleChange}
+                  value={nome}
+                  onChange={(e) => setNome(e.target.value)}
                   required
                 />
               </div>
@@ -135,8 +150,8 @@ export default function AtualizarModal({ isOpen, onClose, cidadaoId }) {
                 <Input
                   id="data_nasc"
                   type="date"
-                  value={formData.data_nasc}
-                  onChange={handleChange}
+                  value={data_nasc}
+                  onChange={(e) => setData_nasc(e.target.value)}
                   required
                 />
               </div>
@@ -151,8 +166,8 @@ export default function AtualizarModal({ isOpen, onClose, cidadaoId }) {
                   placeholder="Digite o RG"
                   minLength={9}
                   maxLength={9}
-                  value={formData.rg}
-                  onChange={handleChange}
+                  value={rg}
+                  onChange={(e) => setRG(e.target.value)}
                 />
               </div>
               <div className="space-y-2">
@@ -162,8 +177,8 @@ export default function AtualizarModal({ isOpen, onClose, cidadaoId }) {
                 <Input
                   id="cpf"
                   placeholder="Digite o CPF"
-                  value={formData.cpf}
-                  onChange={handleChange}
+                  value={formatCPF(cpf)}
+                  onChange={(e) => setCPF(e.target.value)}
                   minLength={11}
                   maxLength={11}
                 />
@@ -177,8 +192,8 @@ export default function AtualizarModal({ isOpen, onClose, cidadaoId }) {
                 <Input
                   id="endereco"
                   placeholder="Digite o endereço"
-                  value={formData.endereco}
-                  onChange={handleChange}
+                  value={endereco}
+                  onChange={(e) => setEndereco(e.target.value)}
                 />
               </div>
               <div className="space-y-2">
@@ -188,8 +203,8 @@ export default function AtualizarModal({ isOpen, onClose, cidadaoId }) {
                 <Input
                   id="bairro"
                   placeholder="Digite o bairro"
-                  value={formData.bairro}
-                  onChange={handleChange}
+                  value={bairro}
+                  onChange={(e) => setBairro(e.target.value)}
                   required
                 />
               </div>
@@ -200,8 +215,8 @@ export default function AtualizarModal({ isOpen, onClose, cidadaoId }) {
                 <Input
                   id="cidade"
                   placeholder="Digite a cidade"
-                  value={formData.cidade}
-                  onChange={handleChange}
+                  value={cidade}
+                  onChange={(e) => setCidade(e.target.value)}
                 />
               </div>
             </div>
@@ -212,10 +227,8 @@ export default function AtualizarModal({ isOpen, onClose, cidadaoId }) {
                 </Label>
                 <Select
                   id="estado"
-                  value={formData.estado}
-                  onValueChange={(value) =>
-                    setFormData((prevData) => ({ ...prevData, estado: value }))
-                  }
+                  value={estado}
+                  onValueChange={(value) => setEstado(value)}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Selecione o estado" />
@@ -258,8 +271,8 @@ export default function AtualizarModal({ isOpen, onClose, cidadaoId }) {
                 <Input
                   id="cep"
                   placeholder="Digite o CEP"
-                  value={formData.cep}
-                  onChange={handleChange}
+                  value={formatCEP(cep)}
+                  onChange={(e) => setCEP(e.target.value)}
                   maxLength={9}
                 />
               </div>
@@ -270,8 +283,8 @@ export default function AtualizarModal({ isOpen, onClose, cidadaoId }) {
                 <Input
                   id="telefone"
                   placeholder="Digite o telefone"
-                  value={formData.telefone}
-                  onChange={handleChange}
+                  value={FormataCelular(telefone)}
+                  onChange={(e) => setTelefone(e.target.value)}
                 />
               </div>
             </div>
@@ -286,8 +299,8 @@ export default function AtualizarModal({ isOpen, onClose, cidadaoId }) {
                   placeholder="Digite o email"
                   maxLength={35}
                   minLength={10}
-                  value={formData.email}
-                  onChange={handleChange}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                 />
               </div>
@@ -298,8 +311,8 @@ export default function AtualizarModal({ isOpen, onClose, cidadaoId }) {
                 <Input
                   id="whatsapp"
                   placeholder="Digite o WhatsApp"
-                  value={formData.whatsapp}
-                  onChange={handleChange}
+                  value={FormataCelular(whatsapp)}
+                  onChange={(e) => setWhatsapp(e.target.value)}
                   required
                 />
               </div>
@@ -312,14 +325,15 @@ export default function AtualizarModal({ isOpen, onClose, cidadaoId }) {
                 id="observacao"
                 placeholder="Digite as observações"
                 maxLength={250}
-                value={formData.observacao}
-                onChange={handleChange}
+                value={observacao}
+                onChange={(e) => setObservacao(e.target.value)}
               />
             </div>
           </div>
           <DialogFooter>
             <Button
-              type="submit"
+              type="button"
+              onClick={handleUpdate}
               className="ml-auto bg-yellow-400 hover:bg-muted hover:text-yellow-400"
             >
               Atualizar
@@ -337,10 +351,10 @@ export default function AtualizarModal({ isOpen, onClose, cidadaoId }) {
         </form>
       </DialogContent>
       <MensagemCarregando open={loading} />
-      <CadastroSucesso
-        show={showSuccess}
-        onClose={() => setShowSuccess(false)}
-      />
+      <UpdateSucesso show={showSuccess} onClose={() => setShowSuccess(false)} />
+      {showError && (
+        <ErroAtualizar open={showError} onClose={() => setShowError(false)} />
+      )}
     </Dialog>
   );
 }

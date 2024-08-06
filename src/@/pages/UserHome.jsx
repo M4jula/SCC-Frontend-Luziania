@@ -171,7 +171,7 @@ export default function HomeUsuarios() {
           <div className="mt-6 flex justify-end">
             <Button
               onClick={() => setIsAddUserModalOpen(true)}
-              className="bg-green-600 text-white"
+              className="bg-green-600 text-white hover:bg-muted hover:text-green-600"
             >
               + USUÁRIO
             </Button>
