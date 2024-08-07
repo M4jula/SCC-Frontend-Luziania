@@ -12,7 +12,7 @@ export default function Home() {
       <section className="w-full h-[100vh] relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-gray-900/50 to-gray-900/80 z-10 pointer-events-none" />
         <img
-          src="/img/planaltina_03.jpg"
+          src="/img/Luziania_02.jpg"
           width={1920}
           height={1080}
           alt="Hero"

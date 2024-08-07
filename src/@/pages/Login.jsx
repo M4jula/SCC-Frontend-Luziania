@@ -67,13 +67,7 @@ export default function Login() {
 
   // Definindo imagens como um array de objetos
   const [currentImage, setCurrentImage] = useState(0);
-  const images = [
-    "/img/planaltina_01.jpg",
-    "/img/planaltina_02.jpg",
-    "/img/planaltina_03.jpg",
-    "/img/planaltina_04.jpg",
-    "/img/planaltina_05.jpg",
-  ];
+  const images = ["/img/Luziania_01.jpeg", "/img/Luziania_02.jpg"];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -88,12 +82,12 @@ export default function Login() {
         <Card className="w-full shadow-lg rounded-lg">
           <CardHeader className="flex flex-col items-center py-6  text-primary-foreground ">
             <img
-              src="/img/prefeitura_planaltina.png"
+              src="/img/logo_luziania.png"
               alt="Logo"
-              width={250}
-              height={250}
+              width={100}
+              height={100}
             />
-            <CardTitle className="text-3xl font-bold mt-4 text-[#004b85]">
+            <CardTitle className="text-3xl font-bold mt-4 text-[#3f4196]">
               Cadastro Cidadão
             </CardTitle>
           </CardHeader>
@@ -115,10 +109,10 @@ export default function Login() {
               />
             </div>
           </CardContent>
-          <CardFooter className="flex flex-col items-center px-8 py-6 bg-[#004b85] rounded-b-lg">
+          <CardFooter className="flex flex-col items-center px-8 py-6 bg-[#3f4196] rounded-b-lg">
             <Button
               onClick={handleSubmit}
-              className="w-full bg-[#ffff] text-[#004b85] font-medium py-3 rounded-lg hover:bg-slate-200 hover:text-[#25037c] focus:outline-none focus:ring-2 text-lg"
+              className="w-full bg-[#ffff] text-[#3f4196] font-medium py-3 rounded-lg hover:bg-slate-200 hover:text-[#004b85] focus:outline-none focus:ring-2 text-lg"
             >
               Entrar
             </Button>

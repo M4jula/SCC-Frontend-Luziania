@@ -75,7 +75,7 @@ const AddUser = ({ open, onClose }) => {
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-[#004b85]">
+          <DialogTitle className="text-[#2e3192]">
             Adicionar Usuário
           </DialogTitle>
           <DialogDescription>
@@ -85,7 +85,7 @@ const AddUser = ({ open, onClose }) => {
         <form onSubmit={handleCreateUser} className="space-y-4 py-4">
           <div className="space-y-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="nome" className="text-right text-[#004b85]">
+              <Label htmlFor="nome" className="text-right text-[#2e3192]">
                 Nome <Label className="text-red-600">*</Label>
               </Label>
               <Input
@@ -99,7 +99,7 @@ const AddUser = ({ open, onClose }) => {
               />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="email" className="text-right text-[#004b85]">
+              <Label htmlFor="email" className="text-right text-[#2e3192]">
                 Email <Label className="text-red-600">*</Label>
               </Label>
               <Input
@@ -114,7 +114,7 @@ const AddUser = ({ open, onClose }) => {
               />
             </div>
             <div className="grid items-center grid-cols-4 gap-4">
-              <Label htmlFor="whatsapp" className="text-right text-[#004b85]">
+              <Label htmlFor="whatsapp" className="text-right text-[#2e3192]">
                 WhatsApp
               </Label>
               <Input
@@ -127,7 +127,7 @@ const AddUser = ({ open, onClose }) => {
               />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="access" className="text-right text-[#004b85]">
+              <Label htmlFor="access" className="text-right text-[#2e3192]">
                 Função <Label className="text-red-600">*</Label>
               </Label>
               <Select
@@ -150,7 +150,7 @@ const AddUser = ({ open, onClose }) => {
               </Select>
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="password" className="text-right text-[#004b85]">
+              <Label htmlFor="password" className="text-right text-[#2e3192]">
                 Senha <Label className="text-red-600">*</Label>
               </Label>
               <Input
@@ -166,7 +166,7 @@ const AddUser = ({ open, onClose }) => {
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" className="bg-[#004b85] hover:bg-green-600">
+            <Button type="submit" className="bg-[#2e3192] hover:bg-green-600">
               Cadastrar
             </Button>
           </DialogFooter>

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#004b85] p-4 md:p-6 w-full">
+    <footer className="bg-[#2e3192] p-4 md:p-6 w-full">
       <div className="container max-w-7xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
         <div className="grid gap-2">
           <h3 className="font-semibold text-[#fff] text-lg">Redes Sociais</h3>

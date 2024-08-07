@@ -99,7 +99,7 @@ export default function CidadaoHome() {
   return (
     <NavSidebar>
       <div className="bg-white text-[#004b85]">
-        <header className="bg-[#004b85] py-4 px-6">
+        <header className="bg-[#2e3192] py-4 px-6">
           <h1 className="text-2xl font-bold text-white">CIDADÃOS</h1>
         </header>
         <main className="p-6">
@@ -113,7 +113,7 @@ export default function CidadaoHome() {
           </div>
           <Table>
             <TableHeader>
-              <TableRow className="bg-[#004b85] hover:bg-[#004b85] text-[#FFF]">
+              <TableRow className="bg-[#2e3192] hover:bg-[#2e3192] text-[#FFF]">
                 <TableHead className="px-4 py-3 text-left text-[#fff]">
                   ID
                 </TableHead>
@@ -142,7 +142,7 @@ export default function CidadaoHome() {
                     setSelectedCidadaoId(cidadao);
                     setIsEditModalOpen(true);
                   }}
-                  className="border-b text-gray-600  hover:bg-[#004b85] hover:text-[#fff] cursor-pointer "
+                  className="border-b text-gray-600  hover:bg-[#2e3192] hover:text-[#fff] cursor-pointer "
                 >
                   <TableCell className="px-4 py-3 font-semibold  ">
                     {cidadao?.id}
@@ -181,7 +181,7 @@ export default function CidadaoHome() {
             <Button
               disabled={currentPage === 1}
               onClick={() => setCurrentPage(currentPage - 1)}
-              className="bg-blue-500 text-white"
+              className="bg-[#2e3192] text-white"
             >
               Anterior
             </Button>
@@ -191,7 +191,7 @@ export default function CidadaoHome() {
             <Button
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage(currentPage + 1)}
-              className="bg-blue-500 text-white"
+              className="bg-[#2e3192] text-white"
             >
               Próxima
             </Button>

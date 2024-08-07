@@ -97,7 +97,7 @@ export default function SolicitacaoADD({ isOpen, onClose }) {
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <Card className="max-w-4xl mx-auto p-6 sm:p-8 md:p-10">
         <CardHeader>
-          <CardTitle className="text-3xl font-bold text-[#004b85]">
+          <CardTitle className="text-3xl font-bold text-[#2e3192]">
             Cadastrar Solicitação
           </CardTitle>
           <CardDescription>
@@ -111,7 +111,7 @@ export default function SolicitacaoADD({ isOpen, onClose }) {
           >
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="nome" className="text-[#004b85]">
+                <Label htmlFor="nome" className="text-[#2e3192]">
                   Cidadão
                 </Label>
                 {/**Componente de listagem de cidadãos */}
@@ -136,14 +136,19 @@ export default function SolicitacaoADD({ isOpen, onClose }) {
                 </Link>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="categoria" className="text-[#004b85]">
+                <Label htmlFor="categoria" className="text-[#2e3192]">
                   Categoria
                 </Label>
                 <Select
                   id="categoria"
                   name="categoria"
                   value={formData.categoria}
-                  onChange={handleChange}
+                  onValueChange={(value) =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      categoria: value,
+                    }))
+                  }
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Selecione a categoria" />
@@ -180,14 +185,19 @@ export default function SolicitacaoADD({ isOpen, onClose }) {
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="origem_cont" className="text-[#004b85]">
+                <Label htmlFor="origem_cont" className="text-[#2e3192]">
                   Origem do Contato
                 </Label>
                 <Select
                   id="origem_cont"
                   name="origem_cont"
                   value={formData.origem_cont}
-                  onChange={handleChange}
+                  onValueChange={(value) =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      origem_cont: value,
+                    }))
+                  }
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Selecione a Origem do Contato" />
@@ -202,7 +212,7 @@ export default function SolicitacaoADD({ isOpen, onClose }) {
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="solicitacao" className="text-[#004b85]">
+                <Label htmlFor="solicitacao" className="text-[#2e3192]">
                   Solicitação
                 </Label>
                 <Textarea
@@ -215,7 +225,7 @@ export default function SolicitacaoADD({ isOpen, onClose }) {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="retorno" className="text-[#004b85]">
+                <Label htmlFor="retorno" className="text-[#2e3192]">
                   Retorno do Atendimento
                 </Label>
                 <Textarea
@@ -230,17 +240,22 @@ export default function SolicitacaoADD({ isOpen, onClose }) {
             </div>
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="urgencia" className="text-[#004b85]">
+                <Label htmlFor="urgencia" className="text-[#2e3192]">
                   Urgência
                 </Label>
                 <Select
                   id="urgencia"
                   name="urgencia"
                   value={formData.urgencia}
-                  onChange={handleChange}
+                  onValueChange={(value) =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      urgencia: value,
+                    }))
+                  }
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Selecione a Origem do Contato" />
+                    <SelectValue placeholder="Selecione a Urgência" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="baixa">Baixa</SelectItem>
@@ -248,17 +263,22 @@ export default function SolicitacaoADD({ isOpen, onClose }) {
                     <SelectItem value="alta">Alta</SelectItem>
                   </SelectContent>
                 </Select>
-                <Label htmlFor="status_sol" className="text-[#004b85]">
+                <Label htmlFor="status_sol" className="text-[#2e3192]">
                   Status
                 </Label>
                 <Select
                   id="status_sol"
                   name="status_sol"
                   value={formData.status_sol}
-                  onChange={handleChange}
+                  onValueChange={(value) =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      status_sol: value,
+                    }))
+                  }
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Selecione a Origem do Contato" />
+                    <SelectValue placeholder="Selecione o status" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="recebido">Recebido</SelectItem>
@@ -267,7 +287,7 @@ export default function SolicitacaoADD({ isOpen, onClose }) {
                     <SelectItem value="concluido">Concluido</SelectItem>
                   </SelectContent>
                 </Select>
-                <Label htmlFor="endereco" className="text-[#004b85]">
+                <Label htmlFor="endereco" className="text-[#2e3192]">
                   Localização
                 </Label>
                 <div className="">
@@ -291,7 +311,7 @@ export default function SolicitacaoADD({ isOpen, onClose }) {
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="arquivo" className="text-[#004b85]">
+                <Label htmlFor="arquivo" className="text-[#2e3192]">
                   Fotos
                 </Label>
                 <Input
@@ -317,7 +337,7 @@ export default function SolicitacaoADD({ isOpen, onClose }) {
             </Button>
             <Button
               type="submit"
-              className="bg-[#004b85] text-[#fff] hover:bg-muted hover:text-[#004b85]"
+              className="bg-[#2e3192] text-[#fff] hover:bg-muted hover:text-[#2e3192]"
             >
               Cadastrar Solicitação
             </Button>

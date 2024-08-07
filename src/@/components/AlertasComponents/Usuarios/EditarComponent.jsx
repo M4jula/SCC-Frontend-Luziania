@@ -78,7 +78,7 @@ export default function EditarComponent({ user, onClose, open }) {
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle className="text-[#004b85]">
+          <DialogTitle className="text-[#2e3192]">
             Atualizar Usuário
           </DialogTitle>
           <DialogDescription>
@@ -87,7 +87,7 @@ export default function EditarComponent({ user, onClose, open }) {
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid items-center grid-cols-4 gap-4">
-            <Label htmlFor="nome" className="text-right text-[#004b85]">
+            <Label htmlFor="nome" className="text-right text-[#2e3192]">
               Nome
             </Label>
             <Input
@@ -99,7 +99,7 @@ export default function EditarComponent({ user, onClose, open }) {
             />
           </div>
           <div className="grid items-center grid-cols-4 gap-4">
-            <Label htmlFor="email" className="text-right text-[#004b85]">
+            <Label htmlFor="email" className="text-right text-[#2e3192]">
               Email
             </Label>
             <Input
@@ -114,7 +114,7 @@ export default function EditarComponent({ user, onClose, open }) {
             />
           </div>
           <div className="grid items-center grid-cols-4 gap-4">
-            <Label htmlFor="password" className="text-right text-[#004b85]">
+            <Label htmlFor="password" className="text-right text-[#2e3192]">
               Senha
             </Label>
             <Input
@@ -129,7 +129,7 @@ export default function EditarComponent({ user, onClose, open }) {
             />
           </div>
           <div className="grid items-center grid-cols-4 gap-4">
-            <Label htmlFor="whatsapp" className="text-right text-[#004b85]">
+            <Label htmlFor="whatsapp" className="text-right text-[#2e3192]">
               WhatsApp
             </Label>
             <Input
@@ -142,7 +142,7 @@ export default function EditarComponent({ user, onClose, open }) {
             />
           </div>
           <div className="grid items-center grid-cols-4 gap-4">
-            <Label htmlFor="acess" className="text-right text-[#004b85]">
+            <Label htmlFor="acess" className="text-right text-[#2e3192]">
               Função
             </Label>
             <Select

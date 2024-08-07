@@ -119,7 +119,7 @@ export default function AtualizarModal({ open, onClose, cidadao }) {
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[600px]">
         <DialogHeader>
-          <DialogTitle className="text-[#004b85]">
+          <DialogTitle className="text-[#2e3192]">
             Atualizar Cidadão
           </DialogTitle>
           <DialogDescription>
@@ -130,7 +130,7 @@ export default function AtualizarModal({ open, onClose, cidadao }) {
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="nome" className="text-[#004b85]">
+                <Label htmlFor="nome" className="text-[#2e3192]">
                   Nome <Label className="text-red-600">*</Label>
                 </Label>
                 <Input
@@ -144,7 +144,7 @@ export default function AtualizarModal({ open, onClose, cidadao }) {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="data_nasc" className="text-[#004b85]">
+                <Label htmlFor="data_nasc" className="text-[#2e3192]">
                   Data de Nascimento <Label className="text-red-600">*</Label>
                 </Label>
                 <Input
@@ -158,7 +158,7 @@ export default function AtualizarModal({ open, onClose, cidadao }) {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="rg" className="text-[#004b85]">
+                <Label htmlFor="rg" className="text-[#2e3192]">
                   RG
                 </Label>
                 <Input
@@ -171,7 +171,7 @@ export default function AtualizarModal({ open, onClose, cidadao }) {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="cpf" className="text-[#004b85]">
+                <Label htmlFor="cpf" className="text-[#2e3192]">
                   CPF
                 </Label>
                 <Input
@@ -186,7 +186,7 @@ export default function AtualizarModal({ open, onClose, cidadao }) {
             </div>
             <div className="grid grid-cols-3 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="endereco" className="text-[#004b85]">
+                <Label htmlFor="endereco" className="text-[#2e3192]">
                   Endereço <Label className="text-red-600">*</Label>
                 </Label>
                 <Input
@@ -197,7 +197,7 @@ export default function AtualizarModal({ open, onClose, cidadao }) {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="bairro" className="text-[#004b85]">
+                <Label htmlFor="bairro" className="text-[#2e3192]">
                   Bairro <Label className="text-red-600">*</Label>
                 </Label>
                 <Input
@@ -209,7 +209,7 @@ export default function AtualizarModal({ open, onClose, cidadao }) {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="cidade" className="text-[#004b85]">
+                <Label htmlFor="cidade" className="text-[#2e3192]">
                   Cidade
                 </Label>
                 <Input
@@ -222,7 +222,7 @@ export default function AtualizarModal({ open, onClose, cidadao }) {
             </div>
             <div className="grid grid-cols-3 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="estado" className="text-[#004b85]">
+                <Label htmlFor="estado" className="text-[#2e3192]">
                   Estado
                 </Label>
                 <Select
@@ -265,7 +265,7 @@ export default function AtualizarModal({ open, onClose, cidadao }) {
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="cep" className="text-[#004b85]">
+                <Label htmlFor="cep" className="text-[#2e3192]">
                   CEP
                 </Label>
                 <Input
@@ -277,7 +277,7 @@ export default function AtualizarModal({ open, onClose, cidadao }) {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="telefone" className="text-[#004b85]">
+                <Label htmlFor="telefone" className="text-[#2e3192]">
                   Telefone
                 </Label>
                 <Input
@@ -290,7 +290,7 @@ export default function AtualizarModal({ open, onClose, cidadao }) {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-[#004b85]">
+                <Label htmlFor="email" className="text-[#2e3192]">
                   Email <Label className="text-red-600">*</Label>
                 </Label>
                 <Input
@@ -305,7 +305,7 @@ export default function AtualizarModal({ open, onClose, cidadao }) {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="whatsapp" className="text-[#004b85]">
+                <Label htmlFor="whatsapp" className="text-[#2e3192]">
                   WhatsApp <Label className="text-red-600">*</Label>
                 </Label>
                 <Input
@@ -318,7 +318,7 @@ export default function AtualizarModal({ open, onClose, cidadao }) {
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="observacao" className="text-[#004b85]">
+              <Label htmlFor="observacao" className="text-[#2e3192]">
                 Observações
               </Label>
               <Textarea

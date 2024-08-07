@@ -64,7 +64,7 @@ export default function SolicitacaoHome() {
     <NavSidebar>
       <div className="flex flex-col gap-6">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-[#004b85]">Solicitações</h1>
+          <h1 className="text-2xl font-bold text-[#2e3192]">Solicitações</h1>
           <div className="flex items-center gap-4">
             <Button
               className="flex items-center gap-2 bg-green-600 hover:text-green-600 hover:bg-muted"
@@ -77,7 +77,7 @@ export default function SolicitacaoHome() {
         </div>
         <Table className="border rounded-lg ">
           <TableHeader>
-            <TableRow className="bg-[#004b85] hover:bg-blue-600 ">
+            <TableRow className="bg-[#2e3192] hover:bg-[#2e3192] ">
               <TableHead className="w-[200px] text-[#fff]  p-4">
                 SOLICITANTE
               </TableHead>
@@ -102,7 +102,7 @@ export default function SolicitacaoHome() {
           <TableBody>
             {solicitacoes.map((solicitacao) => (
               <TableRow
-                className=" transition-colors hover:bg-[#004b85] hover:text-[#fff] font-semibold text-gray-600"
+                className=" transition-colors hover:bg-[#2e3192] hover:text-[#fff] font-semibold text-gray-600"
                 key={solicitacao.id}
               >
                 <TableCell className="p-4">

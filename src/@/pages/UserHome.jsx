@@ -94,12 +94,12 @@ export default function HomeUsuarios() {
       <div className="flex flex-col h-full">
         <main className="flex-1 p-6">
           <div className="mb-6">
-            <h1 className="text-xl font-semibold text-[#004b85]">USUÁRIOS</h1>
+            <h1 className="text-xl font-semibold text-[#2e3192]">USUÁRIOS</h1>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full table-auto">
               <thead>
-                <tr className="bg-[#004b85] text-[#FFF]">
+                <tr className="bg-[#2e3192] text-[#FFF]">
                   <th className="px-4 py-3 text-left">NOME</th>
                   <th className="px-4 py-3 text-left">E-MAIL</th>
                   <th className="px-4 py-3 text-left">FUNÇÃO</th>
@@ -109,7 +109,7 @@ export default function HomeUsuarios() {
               <tbody className="hover:text-[#ffff]">
                 {currentUsers?.map((usuario) => (
                   <tr
-                    className="border-b text-gray-600  hover:bg-[#004b85] hover:text-[#fff] cursor-pointer "
+                    className="border-b text-gray-600  hover:bg-[#2e3192] hover:text-[#fff] cursor-pointer "
                     key={usuario.id}
                     onClick={() => {
                       setSelectedUser(usuario);
@@ -153,7 +153,7 @@ export default function HomeUsuarios() {
             <Button
               disabled={currentPage === 1}
               onClick={() => setCurrentPage(currentPage - 1)}
-              className="bg-blue-500 text-white"
+              className="bg-[#2e3192] text-white"
             >
               Anterior
             </Button>
@@ -163,7 +163,7 @@ export default function HomeUsuarios() {
             <Button
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage(currentPage + 1)}
-              className="bg-blue-500 text-white"
+              className="bg-[#2e3192] text-white"
             >
               Próxima
             </Button>

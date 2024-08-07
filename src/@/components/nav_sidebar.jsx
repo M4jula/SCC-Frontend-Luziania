@@ -25,13 +25,13 @@ export default function NavSidebar({ children }) {
         }`}
       >
         <div className="flex items-center justify-between p-4">
-          <div className="flex items-center gap-2 mb-5">
+          <div className="flex items-center gap-2 mb-5 ml-14">
             <Link to={"/home"} prefetch={false}>
               <img
-                src="/img/logo_site.png"
+                src="/img/logo_luziania.png"
                 alt="Company Logo"
-                width={410}
-                height={410}
+                width={90}
+                height={100}
                 className="text-white"
               />
             </Link>
@@ -45,31 +45,31 @@ export default function NavSidebar({ children }) {
           </Button>
         </div>
         <nav className="p-4 space-y-4 text-lg ">
-          <div className="flex items-center gap-2 text-[#004b85] hover:bg-[#004b85] hover:text-[#fff] hover:rounded-md p-2 transition-colors ">
+          <div className="flex items-center gap-2 text-[#2e3192] hover:bg-[#2e3192] hover:text-[#fff] hover:rounded-md p-2 transition-colors ">
             <HomeIcon className="w-5 h-5" />
             <Link to={"/home"} className="flex items-center w-full">
               Home
             </Link>
           </div>
-          <div className="flex items-center gap-2 text-[#004b85] hover:bg-[#004b85] hover:text-[#fff] hover:rounded-md p-2 transition-colors ">
+          <div className="flex items-center gap-2 text-[#2e3192] hover:bg-[#2e3192] hover:text-[#fff] hover:rounded-md p-2 transition-colors ">
             <UsersIcon className="w-5 h-5" />
             <Link to={"/usuarios"} className="flex items-center w-full">
               Usuários
             </Link>
           </div>
-          <div className="flex items-center gap-2 text-[#004b85] hover:bg-[#004b85] hover:text-[#fff] hover:rounded-md p-2 transition-colors ">
+          <div className="flex items-center gap-2 text-[#2e3192] hover:bg-[#2e3192] hover:text-[#fff] hover:rounded-md p-2 transition-colors ">
             <FileTextIcon className="w-5 h-5" />
             <Link to={"/cidadaos"} className="flex items-center w-full">
               Cidadãos
             </Link>
           </div>
-          <div className="flex items-center gap-2 text-[#004b85] hover:bg-[#004b85] hover:text-[#fff] hover:rounded-md p-2 transition-colors ">
+          <div className="flex items-center gap-2 text-[#2e3192] hover:bg-[#2e3192] hover:text-[#fff] hover:rounded-md p-2 transition-colors ">
             <CalendarIcon className="w-5 h-5" />
             <Link to={"/solicitacoes"} className="flex items-center w-full">
               Solicitações
             </Link>
           </div>
-          <div className="flex items-center gap-2 text-[#004b85] hover:bg-[#004b85] hover:text-[#fff] hover:rounded-md p-2 transition-colors ">
+          <div className="flex items-center gap-2 text-[#2e3192] hover:bg-[#2e3192] hover:text-[#fff] hover:rounded-md p-2 transition-colors ">
             <ClipboardIcon className="w-5 h-5" />
             <Link to={"#"} className="flex items-center w-full">
               Relatórios
@@ -78,7 +78,7 @@ export default function NavSidebar({ children }) {
         </nav>
       </aside>
       <div className="flex flex-col flex-1">
-        <header className="flex items-center justify-between p-4 bg-gradient-to-r from-green-700 to-blue-700">
+        <header className="flex items-center justify-between p-4 bg-gradient-to-r from-[#39b54a] to-[#2e3192]">
           <Button
             variant="ghost"
             size="icon"
@@ -90,7 +90,7 @@ export default function NavSidebar({ children }) {
             <h1 className="text-2xl font-bold text-white">
               Sistema Cadastro Cidadão
             </h1>
-            <p className="text-sm text-white">Planaltina de Goiás</p>
+            <p className="text-sm text-white">Luziânia</p>
           </div>
           <div className="flex items-center space-x-2">
             <div onClick={handleIconClick} style={{ cursor: "pointer" }}>
